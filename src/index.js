@@ -27,12 +27,6 @@ export async function webApi(context) {
 const HomeView = ({error, results, search}) => {
   return(
     <div>
-      <head>
-        <meta charSet="utf-8" />
-				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>Home</title>
-      </head>
       <div>
         <div>
           <form>
@@ -42,7 +36,7 @@ const HomeView = ({error, results, search}) => {
         </div>
         <div>
           {
-              results.length > 0
+              results > 0
                 ? (
                   <ul>
                     {results.map(hero => (
