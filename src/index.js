@@ -6,14 +6,14 @@ import './index.css';
 
 
 
-const HomeView = (results) => {
+const HomeView = (results, search) => {
 
   const [hero, setHero] = React.useState({
     data: {},
     loading: true
   })
   
-  const click = (search) => {
+  const Click = (search) => {
     const data = fetch(`https://www.superheroapi.com/api.php/10157652346894910/search/${search}`)
       .then((res) => {
         res.json()
@@ -23,17 +23,19 @@ const HomeView = (results) => {
       }))
       setHero({
         results: data || [],
-        loading: false, 
+        loading: false,
+        search: search || ''
       })
       
   }
 
   return(
     <div>
-      <input placeholder="Movie Name" type="text" name="search"/>
-      <button onClick={click}>Search</button>
+      <input placeholder="Movie Name" type="text" name="search" defaultValue={search} />
+      <button onClick={Click}>Search</button>
       <div>
         {
+          hero.loading?'':
           hero.results.name
         }
       </div>
