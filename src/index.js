@@ -9,23 +9,19 @@ import './index.css';
 const HomeView = (results) => {
 
   const [hero, setHero] = React.useState({
-    data: {},
-    loading: true
+    data: []
   })
   
   const Click = async(search) => {
     const data = fetch(`https://www.superheroapi.com/api.php/10157652346894910/search/${search}`)
       .then((res) => {
+        res.json()
+      })
+      .then((data) => {
         setHero({
-        results: res,
-        loading: false
+          data
+        })
       })
-      console.log(res)
-      })
-      .catch((err => {
-        throw new Error('Failed to load heroes')
-      }))
-       
   }
 
   
@@ -35,7 +31,11 @@ const HomeView = (results) => {
       <button onClick={Click}>Search</button>
       <div>
         {
-          JSON.stringify(hero)
+          hero.map((heroes) => {
+            return(
+              <h1>{heroes.name}</h1>
+            )
+          })
         }
       </div>
     </div>
