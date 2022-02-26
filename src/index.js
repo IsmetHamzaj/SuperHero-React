@@ -6,7 +6,7 @@ import './index.css';
 
 
 
-const HomeView = (results, search) => {
+const HomeView = (results) => {
 
   const [hero, setHero] = React.useState({
     data: {},
@@ -23,20 +23,18 @@ const HomeView = (results, search) => {
       }))
       setHero({
         results: data || [],
-        loading: false,
-        search: search || ''
+        loading: false
       })
       
   }
 
   return(
     <div>
-      <input placeholder="Movie Name" type="text" name="search" defaultValue={search} />
+      <input placeholder="Movie Name" type="text" name="search"  />
       <button onClick={Click}>Search</button>
       <div>
         {
-          hero.loading?'':
-          hero.results.name
+          results.data.name  
         }
       </div>
     </div>
