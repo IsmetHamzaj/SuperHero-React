@@ -16,25 +16,26 @@ const HomeView = (results) => {
   const Click = async(search) => {
     const data = fetch(`https://www.superheroapi.com/api.php/10157652346894910/search/${search}`)
       .then((res) => {
-        res.json()
+        setHero({
+        results: res,
+        loading: false
+      })
+      console.log(res)
       })
       .catch((err => {
         throw new Error('Failed to load heroes')
       }))
-      setHero({
-        results: data || [],
-        loading: false
-      })      
+       
   }
 
+  
   return(
     <div>
       <input placeholder="Movie Name" type="text" name="search"  />
       <button onClick={Click}>Search</button>
       <div>
         {
-          hero.loading?'':
-          hero.results.data.name
+          JSON.stringify(hero)
         }
       </div>
     </div>
