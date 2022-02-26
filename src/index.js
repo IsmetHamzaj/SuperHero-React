@@ -13,7 +13,7 @@ const HomeView = (results) => {
     loading: true
   })
   
-  const Click = (search) => {
+  const Click = async(search) => {
     const data = fetch(`https://www.superheroapi.com/api.php/10157652346894910/search/${search}`)
       .then((res) => {
         res.json()
@@ -24,8 +24,7 @@ const HomeView = (results) => {
       setHero({
         results: data || [],
         loading: false
-      })
-      
+      })      
   }
 
   return(
@@ -34,7 +33,8 @@ const HomeView = (results) => {
       <button onClick={Click}>Search</button>
       <div>
         {
-          results.data.name  
+          hero.loading?'':
+          hero.results.data.name
         }
       </div>
     </div>
@@ -46,7 +46,3 @@ ReactDOM.render(
   <HomeView/>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
