@@ -1,22 +1,31 @@
-import HomeView from "./components/home"
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import {
+    HomeView
+} from "./components/home"
+import {
+    FavoriteView
+} from "./components/favorite"
+import {
+    Route,
+    Routes
+} from 'react-router-dom'
 
 
-const App = () => {
+function App() {
     return(
-        <Router>
         <div>
-            
-            <div>
-            <HomeView />
-            <Routes>
-                <Route path="/">
-                    <HomeView />
-                </Route>
-            </Routes>
-            </div>
+            <ul style={{display: 'flex', justifyContent: 'center', justifyContent: "space-between"}}>
+                <li>
+                    <a href="/" style={{textDecoration: 'none', color: 'black'}}>Home</a>
+                </li>
+                <li>
+                    <a href="/favorite" style={{textDecoration: 'none', color: 'black'}}>Favorite</a>
+                </li>
+            </ul>
+        <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route path="/favorite" element={<FavoriteView />} />
+        </Routes>
         </div>
-        </Router>
     )
 }
 

@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
 
 
-const HomeView = () => {
+export const HomeView = () => {
     const [search, setSearch] = useState("")
     const [heros, setHero] = useState()
     const [favoriteHero, setFavoriteHero] = useState([])
-    const Click = async(event, props) => {
+    const Click = async(event) => {
       event.preventDefault()
       fetch(`https://www.superheroapi.com/api.php/10157652346894910/search/${search}`)
         .then((res) => {
@@ -62,7 +62,7 @@ const HomeView = () => {
                   <h1 className="race">{hero.appearance.race}</h1>
                   <img src={hero.image.url} alt="" className="image" />
                   {favoriteHero.includes(hero.id)? (
-                    <button onClick={() => Remove(hero.id)}>-</button>
+                    <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>+</button>
                   ): (
                     <button onClick={() => {setFavoriteHero([...favoriteHero, hero.id])}}>+</button>
                   )}
@@ -73,5 +73,3 @@ const HomeView = () => {
       </div>
     );
 }
-
-export default HomeView
