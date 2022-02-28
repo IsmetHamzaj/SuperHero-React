@@ -1,27 +1,25 @@
-import React, {
+import {
     useState,
     useEffect
 } from 'react'
 
+
 export const FavoriteView = () => {
-    const [heros, setHero] = useState()
     const [favoriteHero, setFavoriteHero] = useState([])
-    const LocalStorage = () => {
-        localStorage.setItem("favorite", JSON.stringify(favoriteHero))
-    }
-
-    useEffect(() => {
-        if (favoriteHero && favoriteHero.length) {
-            LocalStorage()
-        }
-    }, [favoriteHero])
-
     const Remove = (id) => {
         let getHero = [...favoriteHero]
         let getHeroIndex = getHero.indexOf(id)
         getHero.splice(getHeroIndex, 1)
         setFavoriteHero(getHero)
     }
+    const LocalStorage = () => {
+        localStorage.setItem("favorite", JSON.stringify(favoriteHero))
+    }
+    useEffect(() => {
+        if (favoriteHero && favoriteHero.length) {
+            LocalStorage()
+        }
+    }, [favoriteHero])
     useEffect(() => {
         let getFavoriteFromLS = localStorage.getItem("favorite")
         if (getFavoriteFromLS) {
@@ -31,26 +29,24 @@ export const FavoriteView = () => {
             }
         }
     }, [])
-    return(
+      return(
         <div>
+          <div>
             {favoriteHero &&
-                favoriteHero.length &&
-                    favoriteHero.map(hero => {
-                        return (
-                            <div>
-                                <h1>{hero}</h1>
-                                {favoriteHero.includes(hero)? (
-                                <button onClick={() => Remove(hero.id)}>-</button>
-                                ): (
-                                    <h1>No favorites to show</h1>
-                                )
-                                }
-                            </div>
-                            
-                        )
-                    })   
-                         
-            }    
+              favoriteHero.length &&
+              favoriteHero.map((hero) => {
+                return(
+                  <div key={hero}>
+                    <h1 className="name">{hero}</h1>
+                    {favoriteHero.includes(hero.id)? (
+                      <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>-</button>
+                    ): (
+                      <button onClick={() => {Remove(hero.id)}}>-</button>
+                    )}
+                  </div>
+                )
+            })}
+          </div>
         </div>
-    )
+      );
 }
