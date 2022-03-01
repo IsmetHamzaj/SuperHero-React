@@ -4,7 +4,7 @@ import {
 } from 'react'
 
 
-export const FavoriteView = () => {
+export const FavoriteView = async () => {
     const [favoriteHero, setFavoriteHero] = useState([])
     const Remove = (id) => {
         let getHero = [...favoriteHero]
@@ -29,16 +29,28 @@ export const FavoriteView = () => {
             }
         }
     }, [])
-    
+    useEffect(() => {
+            let getId = JSON.parse(localStorage.getItem("favorite"))
+            // console.log(getId)
+            let heroes = []
+            for (const id of getId) {
+                let response = fetch(`https://www.superheroapi.com/api.php/10157652346894910/${id}`)
+                console.log(response)
+                const data = response.json()
+                setFavoriteHero(heroes.push(data))
+            }
+            
+    }, [])
+    console.log(favoriteHero)
     return(
     <div>
         <div>
-            {favoriteHero  && 
+            {favoriteHero  &&
                 favoriteHero.length &&
                 favoriteHero.map((hero) => {
                     return(
                         <div key={hero}>
-                            <h1 className="name">{hero}</h1>
+                            <h1 className="name">{hero.id}</h1>
                             {favoriteHero.includes(hero.id)? (
                                 <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>-</button>
                             ): (

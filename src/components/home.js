@@ -28,13 +28,6 @@ export const HomeView = () => {
         LocalStorage()
       }
     }, [favoriteHero])
-  
-    const Remove = (id) => {
-      let getHero = [...favoriteHero]
-      let getHeroIndex = getHero.indexOf(id)
-      getHero.splice(getHeroIndex, 1)
-      setFavoriteHero(getHero)
-    }
     useEffect(() => {
       let getFavoriteFromLS = localStorage.getItem("favorite")
       if(getFavoriteFromLS) {
