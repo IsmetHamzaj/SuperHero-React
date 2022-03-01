@@ -33,7 +33,7 @@ export const FavoriteView = () => {
     return(
     <div>
         <div>
-            {favoriteHero &&
+            {favoriteHero  && 
                 favoriteHero.length &&
                 favoriteHero.map((hero) => {
                     return(
