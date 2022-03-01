@@ -29,24 +29,25 @@ export const FavoriteView = () => {
             }
         }
     }, [])
-      return(
+    
+    return(
+    <div>
         <div>
-          <div>
             {favoriteHero &&
-              favoriteHero.length &&
-              favoriteHero.map((hero) => {
-                return(
-                  <div key={hero}>
-                    <h1 className="name">{hero}</h1>
-                    {favoriteHero.includes(hero.id)? (
-                      <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>-</button>
-                    ): (
-                      <button onClick={() => {Remove(hero.id)}}>-</button>
-                    )}
-                  </div>
-                )
-            })}
-          </div>
+                favoriteHero.length &&
+                favoriteHero.map((hero) => {
+                    return(
+                        <div key={hero}>
+                            <h1 className="name">{hero}</h1>
+                            {favoriteHero.includes(hero.id)? (
+                                <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>-</button>
+                            ): (
+                                <button onClick={() => {Remove(hero.id)}}>-</button>
+                            )}
+                        </div>
+                    )
+                })}
         </div>
-      );
+    </div>
+    );
 }
