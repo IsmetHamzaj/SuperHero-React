@@ -48,12 +48,15 @@ export const FavoriteView = () => {
     <div>
         <div>
             {favoriteHero &&
-                favoriteHero.length &&
+                //favoriteHero.length &&
                     favoriteHero.map((hero) => {
                     return(
                         <div key={hero.id}>
                             <h1 className="name">{hero.name}</h1>
-                            <h1></h1>
+                            <h1 className="full_name">{hero.biography[`full-name`]}</h1>
+                            <h1 className="alignment">{hero.biography.alignment}</h1>
+                            <h1 className="race">{hero.appearance.race}</h1>
+                            <img src={hero.image.url} alt="" className="image" />
 
                             {/* {favoriteHero.includes(hero.id)? (
                                 <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>-</button>
