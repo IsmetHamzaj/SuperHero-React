@@ -20,15 +20,15 @@ export const FavoriteView = () => {
             LocalStorage()
         }
     }, [favoriteHero])
-    useEffect(() => {
-        let getFavoriteFromLS = localStorage.getItem("favorite")
-        if (getFavoriteFromLS) {
-            getFavoriteFromLS = JSON.parse(getFavoriteFromLS)
-            if (getFavoriteFromLS.length) {
-                setFavoriteHero(getFavoriteFromLS)
-            }
-        }
-    }, [])
+    // useEffect(() => {
+    //     let getFavoriteFromLS = localStorage.getItem("favorite")
+    //     if (getFavoriteFromLS) {
+    //         getFavoriteFromLS = JSON.parse(getFavoriteFromLS)
+    //         if (getFavoriteFromLS.length) {
+    //             setFavoriteHero(getFavoriteFromLS)
+    //         }
+    //     }
+    // }, [])
     useEffect(() => {
         let getId = JSON.parse(localStorage.getItem("favorite"));
         (async () => {
