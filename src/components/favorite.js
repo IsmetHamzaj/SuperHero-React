@@ -4,7 +4,7 @@ import {
 } from 'react'
 
 
-export const FavoriteView = async () => {
+export const FavoriteView = () => {
     const [favoriteHero, setFavoriteHero] = useState([])
     const Remove = (id) => {
         let getHero = [...favoriteHero]
@@ -30,32 +30,36 @@ export const FavoriteView = async () => {
         }
     }, [])
     useEffect(() => {
-            let getId = JSON.parse(localStorage.getItem("favorite"))
-            // console.log(getId)
-            let heroes = []
-            for (const id of getId) {
-                let response = fetch(`https://www.superheroapi.com/api.php/10157652346894910/${id}`)
-                console.log(response)
-                const data = response.json()
-                setFavoriteHero(heroes.push(data))
-            }
-            
-    }, [])
-    console.log(favoriteHero)
+        let getId = JSON.parse(localStorage.getItem("favorite"));
+        (async () => {
+          const heros = [];
+          for await (const id of getId) {
+            await (async () => {
+              const response = await fetch(`https://www.superheroapi.com/api.php/10157652346894910/${id}`);
+              const data = await response.json();
+              heros.push(data);
+            })();
+          }
+          setFavoriteHero(heros);
+        })();
+      }, []);
+
     return(
     <div>
         <div>
-            {favoriteHero  &&
+            {favoriteHero &&
                 favoriteHero.length &&
-                favoriteHero.map((hero) => {
+                    favoriteHero.map((hero) => {
                     return(
-                        <div key={hero}>
-                            <h1 className="name">{hero.id}</h1>
-                            {favoriteHero.includes(hero.id)? (
+                        <div key={hero.id}>
+                            <h1 className="name">{hero.name}</h1>
+                            <h1></h1>
+
+                            {/* {favoriteHero.includes(hero.id)? (
                                 <button style={{backgroundColor: 'white', color: 'white', border: 'none'}}>-</button>
                             ): (
                                 <button onClick={() => {Remove(hero.id)}}>-</button>
-                            )}
+                            )} */}
                         </div>
                     )
                 })}
