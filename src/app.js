@@ -13,12 +13,12 @@ import {
 function App() {
     return(
         <div>
-            <ul style={{display: 'flex', justifyContent: 'center', justifyContent: "space-between"}}>
+            <ul style={{display: 'flex', justifyContent: 'center', justifyContent: "space-between", listStyle: 'none'}}>
                 <li>
                     <a href="/" style={{textDecoration: 'none', color: 'black'}}>Home</a>
                 </li>
                 <li>
-                    <a href="/favorite" style={{textDecoration: 'none', color: 'black'}}>Favorite</a>
+                    <a href="/favorite" style={{textDecoration: 'none', color: 'black', listStyle: 'none'}}>Favorite</a>
                 </li>
             </ul>
         <Routes>

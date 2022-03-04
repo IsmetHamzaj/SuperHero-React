@@ -31,17 +31,31 @@ export const FavoriteView = () => {
     }, [])
     useEffect(() => {
         let getId = JSON.parse(localStorage.getItem("favorite"));
+        console.log(getId)
         (async () => {
           const heros = [];
+        //   console.log(heros)
           for await (const id of getId) {
             await (async () => {
               const response = await fetch(`https://www.superheroapi.com/api.php/10157652346894910/${id}`);
+            //   console.log(response);
               const data = await response.json();
-              heros.push(data);
+              heros.push(data.id);
+              console.log(heros)
             })();
           }
           setFavoriteHero(heros);
         })();
+
+// const heros = []
+        // for(const id of getId) {
+        //     const response = fetch(`https://www.superheroapi.com/api.php/10157652346894910/${id}`)
+        //         .then(res => res.json()
+        //         .then(data => heros.push(data)))
+        //         console.log(response)
+        // }
+        // setFavoriteHero(heros)
+
       }, []);
 
     return(
@@ -49,11 +63,11 @@ export const FavoriteView = () => {
         <div>
             {favoriteHero &&
                 favoriteHero.length &&
-                    favoriteHero.map((hero) => {
+                    favoriteHero.map((hero, index) => {
                     return(
-                        <div key={hero.id}>
-                            <h1 className="name">{hero.name}</h1>
-                            <h1>{hero.biography['full-name']}</h1>
+                        <div key={index}>
+                            <h1 className="name">{hero}</h1>
+                            {/* <h1>{hero.biography['full-name']}</h1> */}
                             {/* <h1>{hero.biography['full-name']}</h1>
                             <h1 className="full_name">{hero.biography[`full-name`]}</h1>
                             <h1 className="alignment">{hero.biography.alignment}</h1>
@@ -72,3 +86,5 @@ export const FavoriteView = () => {
     </div>
     );
 }
+
+
